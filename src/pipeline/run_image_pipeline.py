@@ -6,7 +6,7 @@ It also includes a main block to run the pipeline on a set of test images and pr
 
 # Import required libraries
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 import logging
 
@@ -74,7 +74,7 @@ def run_single_image(image_path: Path):
         actuator.execute(decision)
 
         event = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "device_id": settings.system.device_id,
             "site_id": settings.system.site_id,
             "plate_text": None,
@@ -107,7 +107,7 @@ def run_single_image(image_path: Path):
         actuator.execute(decision)
 
         event = {
-            "timestamp": datetime.utcnow().isoformat(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
             "device_id": settings.system.device_id,
             "site_id": settings.system.site_id,
             "plate_text": None,
@@ -148,7 +148,7 @@ def run_single_image(image_path: Path):
     total_latency = (time.perf_counter() - total_start) * 1000
 
     event = {
-        "timestamp": datetime.utcnow().isoformat(),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
         "device_id": settings.system.device_id,
         "site_id": settings.system.site_id,
         "plate_text": ocr_result["plate_text"],

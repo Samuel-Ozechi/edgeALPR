@@ -1,7 +1,7 @@
 [project]
 name = "vision-based-access-intelligence"
 version = "0.1.0"
-description = "Add your description here"
+description = "Lightweight edge-native ALPR and access control system"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -22,3 +22,49 @@ dependencies = [
     "ultralytics>=8.4.35",
     "rapidfuzz>=3.12.0",
 ]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.1.0",
+    "black>=23.9.0",
+    "mypy>=1.5.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+python_classes = "Test*"
+python_functions = "test_*"
+addopts = "-v --cov=src --cov-report=term-missing --cov-report=html --tb=short"
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["*/tests/*", "*/test_*.py"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+select = ["E", "F", "W", "I", "N", "UP", "B", "A"]
+
+[tool.black]
+line-length = 100
+target-version = ["py312"]
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true

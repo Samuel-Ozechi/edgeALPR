@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  edgealpr:
+    build:
+      context: .
+      dockerfile: Dockerfile.pi
+    container_name: edgealpr
+    restart: unless-stopped
+    environment:
+      # Configuration
+      EDGEALPR_LOG_LEVEL: INFO
+      EDGEALPR_DATABASE_PATH: /app/data/edgealpr.db
+      EDGEALPR_LOG_PATH: /app/data/logs
+      
+      # Detector configuration
+      DETECTOR_BACKEND: pytorch  # Can be: pytorch, onnx, hailo
+      VEHICLE_CONF_THRESHOLD: 0.45
+      PLATE_CONF_THRESHOLD: 0.5
+      
+      # OCR configuration
+      OCR_CONFIDENCE_THRESHOLD: 0.8
+      
+      # Access control
+      ENABLE_CLASS_MATCHING: "true"
+      VEHICLE_TARGET_CLASSES: car,truck,bus,motorcycle
+    
+    volumes:
+      # Persistent storage
+      - ./data:/app/data
+      - ./models:/app/models
+      
+      # Video input (if using USB camera or video file)
+      - /dev/video0:/dev/video0:rw  # USB camera device
+    
+    devices:
+      # GPIO access for relay control (if needed)
+      - /dev/mem:/dev/mem
+      - /dev/gpiomem:/dev/gpiomem
+    
+    privileged: false
+    
+    # Security options
+    security_opt:
+      - no-new-privileges:true
+    
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "python", "-c", "import sys; sys.exit(0)"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # Optional: Database service for development
+  # Uncomment to use external SQLite database service
+  # database:
+  #   image: keinos/sqlite3:latest
+  #   container_name: edgealpr-db
+  #   volumes:
+  #     - db-data:/root/db
+  #   ports:
+  #     - "8081:8081"  # Web UI
+  #   restart: unless-stopped
+
+# volumes:
+#   db-data:
+
+networks:
+  default:
+    name: edgealpr-network

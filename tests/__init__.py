@@ -1,0 +1,1 @@
+"""edgeALPR tests package."""
