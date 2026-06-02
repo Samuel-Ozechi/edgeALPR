@@ -1,0 +1,10 @@
+numpy==1.26.4
+opencv-contrib-python==4.11.0.86
+paddleocr==2.7.3
+paddlepaddle==2.6.2
+pydantic==2.13.4
+pydantic-settings==2.14.1
+rapidfuzz==3.14.5
+torch==2.11.0
+tqdm==4.67.3
+ultralytics==8.4.48

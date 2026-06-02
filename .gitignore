@@ -1,0 +1,41 @@
+# Python / Environment
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+.env
+.pytest_cache/
+
+# Train, evaluation and output data
+data/
+# data/samples/*
+# data/vehicle_identification_outputs/*
+# data/logs/*
+# !data/samples/.gitkeep
+# !data/logs/.gitkeep
+
+
+# Hardware / Build Artifacts 
+*.har
+hailo_reports/
+build/
+dist/
+*.egg-info/
+
+# Jupyter Checkpoints and Notebooks
+.ipynb_checkpoints
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.log
+
+# Local Secrets
+# Any credentials for S3/StorageGrid or database passwords
+credentials.json
+*.pem
+secrets/
