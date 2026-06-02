@@ -721,18 +721,6 @@ Free for personal and commercial use with proper attribution.
 
 ---
 
-## Roadmap
-
-- [ ] **API Server** - REST/gRPC endpoints for remote access
-- [ ] **Web Dashboard** - Real-time monitoring and analytics UI
-- [ ] **Multi-camera Support** - Handle multiple video streams
-- [ ] **GPU Optimization** - CUDA/TensorRT acceleration
-- [ ] **Cloud Integration** - AWS/GCP/Azure deployment templates
-- [ ] **CI/CD Pipeline** - GitHub Actions for automated testing
-- [ ] **Mobile App** - React Native companion app
-
----
-
 ## Contributing
 
 Contributions welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
