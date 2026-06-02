@@ -1,0 +1,61 @@
+paths:
+  vehicle_detector: "models/vehicle_detector.pt"
+  plate_detector: "models/plate_detector.pt"
+  log_dir: "data/logs"
+  database: "barrier.db"
+
+thresholds:
+  vehicle_conf: 0.40
+  plate_conf: 0.25
+  ocr_conf: 0.75
+
+models:
+  vehicle_target_classes:
+    - car
+    - truck
+    - bus
+    - motorcycle
+
+ocr:
+  lang: "en"
+  use_angle_cls: true
+
+device:
+  device_id: "barrier_unit_001"
+  site_id: "gate_001"
+
+video:
+  source: 0
+  frame_width: 1280
+  frame_height: 720
+  display: true
+  process_every_n_frames: 3
+  save_review_frames: true
+  review_frame_dir: "data/logs/review_frames"
+
+temporal:
+  enabled: true
+  window_size: 5
+  min_votes: 2
+  max_window_time_ms: 700
+  decision_cooldown_ms: 3000
+  use_confidence_weighting: true
+
+actuator:
+  mode: "mock"           # set to "gpio" on Raspberry Pi
+  relay_pin: 17          # BCM GPIO17, physical pin 11
+  relay_active_high: true
+  open_pulse_seconds: 1.0
+  open_hold_seconds: 3
+  same_plate_cooldown_seconds: 10
+  global_cooldown_seconds: 2
+  fail_safe_action: "review"
+
+runtime:
+  detector_backend: "torch"   # options: "torch", "hailo"
+
+paths:
+  vehicle_detector: "models/vehicle_detector.pt"
+  plate_detector: "models/plate_detector.pt"
+  vehicle_detector_hef: "models/vehicle_detector.hef"
+  plate_detector_hef: "models/plate_detector.hef"
