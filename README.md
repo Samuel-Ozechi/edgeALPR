@@ -19,7 +19,7 @@ A **production-ready, extensible** open-source framework for automatic license p
 
 ---
 
-## Real-World Applications
+## Applications
 
 ### **Parking Access Control**
 Automatically recognize authorized vehicles and open barriers/gates without human intervention.
